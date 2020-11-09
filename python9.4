@@ -1,0 +1,21 @@
+maxadd = None
+maxemail = 0
+fname = input("Enter file name:")
+if len(fname) < 1 :
+    fname = 'mbox-short.txt'
+ofile = open(fname)
+emailadd = dict()
+
+for line in ofile:
+    if line.startswith("From "):
+        line = line.rstrip()
+        email = line.split()
+        emailer = email[1]
+        emailadd[emailer] = emailadd.get(emailer, 0) + 1
+
+for line in emailadd:
+    if emailadd[line] > maxemail:
+        maxadd = line
+        maxemail = emailadd[line]
+
+print(maxadd, maxemail)
